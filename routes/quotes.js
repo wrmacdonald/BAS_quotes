@@ -10,6 +10,7 @@ router.get("/", async (req, res, next) => {
   // Get the body & validate it
   // const { car_data } = req.body;
 
+  // test Github
   // if (!car_data) {
   //   res.status(400).json({
   //     statusCode: 400,
