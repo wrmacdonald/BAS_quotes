@@ -15,20 +15,24 @@ router.get("/", async (req, res, next) => {
   };
 
   // Call the scraper function
-  let quote_data;
   try {
-    quote_data = await scraper.scraperObjTruecar(car_data, true); // set 2nd arg to false for Docker
+    const truecar_quote = await scraper.scraperObjTruecar(car_data, true); // set 2nd arg to false for Docker
+
+    quotes = [truecar_quote];
+
+    res.status(200).json({
+      statusCode: 200,
+      message: "Test quotes correctly retrieved",
+      data: { quotes },
+    });
   } catch (error) {
     console.error(error);
-    quote_data = -1;
-  }
 
-  // Return the array of questions to the client
-  res.status(200).json({
-    statusCode: 200,
-    message: "Quotes correctly retrieved",
-    data: { quote_data },
-  });
+    res.status(500).json({
+      statusCode: 500,
+      message: "Error receiving test quotes",
+    });
+  }
 });
 
 // POST route - used for quotes from passed in user data
