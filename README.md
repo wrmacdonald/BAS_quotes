@@ -1,12 +1,12 @@
-# Run the application in development with:
+# Locally run the application in development with: - (preferred)
 > npm run dev 
 
 ## server should be running on: 
 http://localhost:3000/
 
+
 # Run just the pageScraper to test puppeteer script:
 > node pageScraper.js
-
 
 
 # On Docker:

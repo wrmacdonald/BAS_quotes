@@ -52,10 +52,11 @@ router.post("/", async (req, res, next) => {
 
     // Call the scraper function
     try {
-      const truecar_quote = await scraper.scraperObjTruecar(car_data, true); // set 2nd arg to false for Docker
-      // const quote_data2 = await scraper.scraperObjTruecar(car_data, true); // set 2nd arg to false for Docker
-
-      quotes = [truecar_quote];
+      quotes = [];
+      // const truecar_quote = await scraper.scraperObjTruecar(car_data, true); // set 2nd arg to false for Docker
+      // quotes.push(truecar_quote);
+      const carmax_quote = await scraper.scraperObjCarmax(car_data, true); // set 2nd arg to false for Docker
+      quotes.push(carmax_quote);
 
       res.status(200).json({
         statusCode: 200,
