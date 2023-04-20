@@ -53,8 +53,8 @@ router.post("/", async (req, res, next) => {
     // Call the scraper function
     try {
       quotes = [];
-      // const truecar_quote = await scraper.scraperObjTruecar(car_data, true); // set 2nd arg to false for Docker
-      // quotes.push(truecar_quote);
+      const truecar_quote = await scraper.scraperObjTruecar(car_data, true); // set 2nd arg to false for Docker
+      quotes.push(truecar_quote);
       const carmax_quote = await scraper.scraperObjCarmax(car_data, true); // set 2nd arg to false for Docker
       quotes.push(carmax_quote);
 
