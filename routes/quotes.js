@@ -50,6 +50,8 @@ router.post("/", async (req, res, next) => {
     // TODO: Validate body
     console.log(car_data);
 
+    // TODO: get temp email to use
+
     // Call the scraper function
     try {
       quotes = [];
