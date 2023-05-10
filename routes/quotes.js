@@ -53,10 +53,36 @@ router.post("/", async (req, res, next) => {
     // Call the scraper function
     try {
       quotes = [];
-      const truecar_quote = await scraper.scraperObjTruecar(car_data, true); // set 2nd arg to false for Docker
-      quotes.push(truecar_quote);
-      const carmax_quote = await scraper.scraperObjCarmax(car_data, true); // set 2nd arg to false for Docker
-      quotes.push(carmax_quote);
+
+      try {
+        const truecar_quote = await scraper.scraperObjTruecar(car_data, true); // set 2nd arg to false for Docker
+        quotes.push(truecar_quote);
+      } catch (error) {
+        quotes.push({
+          price: "-1",
+          error: true,
+          provider: "Truecar",
+          vin: car_data["vin"],
+        });
+      }
+      // const truecar_quote = await scraper.scraperObjTruecar(car_data, true); // set 2nd arg to false for Docker
+      // quotes.push(truecar_quote);
+
+      try {
+        const carmax_quote = await scraper.scraperObjCarmax(car_data, true); // set 2nd arg to false for Docker
+        quotes.push(carmax_quote);
+      } catch (error) {
+        quotes.push({
+          price: "-1",
+          error: true,
+          provider: "Carmax",
+          vin: car_data["vin"],
+        });
+      }
+      // const carmax_quote = await scraper.scraperObjCarmax(car_data, true); // set 2nd arg to false for Docker
+      // quotes.push(carmax_quote);
+
+      console.log(quotes);
 
       res.status(200).json({
         statusCode: 200,
